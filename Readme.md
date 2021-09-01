@@ -87,9 +87,10 @@ function draw(i = 0) {
 - try `Math.sin` and `Math.cos` for color manipulation
 
 
+
 ## Lesson3
 
-**Goal: use javascript to scale to scene**
+**Goal: use javascript to scale the scene**
 
 - let make `translate` arguments `x` and `y` dynamic with a [spread opeator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 
@@ -113,14 +114,14 @@ for(j in centers){
 
 ````
 
-- you can also use build an array itself dynamically with a [map](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function
+- you can also create it dynamically with a [map](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function
 
 ```
 // equal to [[50, 50], [150, 50], [250, 50]]
 [...Array(3).keys()].map(key => [50 * (2*key + 1), 50])
 ```
 
-- you can even build upon it a extended array 
+- you can even build upon it an extended array 
 
 ```
     const centers = [...Array(3).keys()].map(key => [50 * (2*key + 1), 50)
@@ -135,8 +136,8 @@ for(j in centers){
 ```
 
 
-### Task
+### Tasks
 
 - draw multple circles using array of `[x, y]` coordinates
-- draw a smily curve om each second circle using [ctx.quadraticCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo)
+- draw a smily curve on each second circle using [ctx.quadraticCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo)
 

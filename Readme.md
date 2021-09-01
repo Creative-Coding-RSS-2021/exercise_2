@@ -141,3 +141,41 @@ for(j in centers){
 - draw multple circles using array of `[x, y]` coordinates
 - draw a smily curve on each second circle using [ctx.quadraticCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo)
 
+
+
+## Lesson 4
+
+**Goal: Use browser events to make a drawing more interactive **
+
+- `canvas` like every other html element can listen for a bunch of events that are out there, for example mouse movements. To make our `canvas` element listen for it, we can define the following expression:
+
+
+```
+canvas.addEventListener('mousemove', event => {
+    // do smth with the event
+    console.log(e)
+})
+```
+
+
+- in order to be able to do smth with this `event` somewhere else in our code, we will need to store events values we need. To do that, we can use a global object:
+
+```
+const MouseCoord = {
+    offsetX: null, 
+    offsetY: null,
+    set: function({offsetX, offsetY}){
+        this.offsetX = offsetX
+        this.offsetY = offsetY
+    }
+}
+canvas.addEventListener('mousemove', event => {
+    MouseCoord.set(event)
+})
+
+```
+
+
+### Task
+
+- let a smile react to position of mouse on `y` axis.

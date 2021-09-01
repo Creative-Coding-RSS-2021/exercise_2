@@ -85,3 +85,58 @@ function draw(i = 0) {
 ### Tasks
 - draw a circle stoke, so that rotating circle runs exactly around it
 - try `Math.sin` and `Math.cos` for color manipulation
+
+
+## Lesson3
+
+**Goal: use javascript to scale to scene**
+
+- let make `translate` arguments `x` and `y` dynamic with a [spread opeator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+
+````
+// define an array [x, y]
+const center = [50, 50]
+
+// and provide using spread opeator
+ctx.translate(...center)
+
+````
+
+- for an array of array it would work like that:
+
+````
+const centers = [[50, 50], [150, 50], [250, 50]]
+for(j in centers){
+    const center = centers[j]
+    ctx.translate(...center)
+}
+
+````
+
+- you can also use build an array itself dynamically with a [map](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function
+
+```
+// equal to [[50, 50], [150, 50], [250, 50]]
+[...Array(3).keys()].map(key => [50 * (2*key + 1), 50])
+```
+
+- you can even build upon it a extended array 
+
+```
+    const centers = [...Array(3).keys()].map(key => [50 * (2*key + 1), 50)
+
+    const moreCenters = [
+        ...centers,
+        ...centers.map(([x, y]) => [x, y+100]),
+        ...centers.map(([x, y]) => [x, y+200]),
+    ]
+
+
+```
+
+
+### Task
+
+- draw multple circles using array of `[x, y]` coordinates
+- draw a smily curve om each second circle using [ctx.quadraticCurveTo](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo)
+

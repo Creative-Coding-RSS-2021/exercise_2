@@ -145,7 +145,7 @@ for(j in centers){
 
 ## Lesson 4
 
-**Goal: Use browser events to make a drawing more interactive **
+**Goal: Use browser events to make a drawing more interactive**
 
 - `canvas` like every other html element can listen for a bunch of events that are out there, for example mouse movements. To make our `canvas` element listen for it, we can define the following expression:
 
@@ -158,7 +158,7 @@ canvas.addEventListener('mousemove', event => {
 ```
 
 
-- in order to be able to do smth with this `event` somewhere else in our code, we will need to store events values we need. To do that, we can use a global object:
+- to do smth. with this `event` somewhere else in our code, we will need to store events values we need. To do that, we can use a global object:
 
 ```
 const MouseCoord = {

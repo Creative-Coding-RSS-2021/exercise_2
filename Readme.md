@@ -68,9 +68,9 @@ function draw(i = 0) {
 `````
 
 
-- since we provide a `draw` function each time a new value of `i` argument, we can also use it to animate another things like color for example.
+- since we provide a `draw` function each time a new value of `i` argument, we can also use it to animate another things. 
 
-    we will use [Modulo(Reminder) Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder)
+    we will use [Modulo(Reminder) Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder) to animate color
 
 ````
 ...

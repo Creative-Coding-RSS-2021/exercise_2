@@ -2,7 +2,7 @@
 
 ## Lesson 1
 
-**Goal: to get to know how to animate things 
+**Goal: to get to know how to animate things**
 
 First things first: take a look at basic examples in [Basic animations](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations) tutorial.
 
@@ -35,12 +35,12 @@ draw()
 
 ## Lesson 2
 
-**Goal: to get to know how to animate multiple things at once
+**Goal: to get to know how to animate multiple things at once**
 
 
---- In order to do more complex animations you will need to [save](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save)/[restore](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/restore) your current drawing state.
+- In order to do more complex animations you will need to [save](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save)/[restore](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/restore) your current drawing state.
 
-let's see a basic example with [rotate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate) function:
+    let's see a basic example with [rotate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate) function:
 
 ````
 function draw(i = 0) {
@@ -68,9 +68,9 @@ function draw(i = 0) {
 `````
 
 
---- since we provide a `draw` function each time a new value of `i` argument, we can also use it to animate another things like color for example.
+- since we provide a `draw` function each time a new value of `i` argument, we can also use it to animate another things like color for example.
 
-we will use [Modulo(Reminder) Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder)
+    we will use [Modulo(Reminder) Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder)
 
 ````
 ...

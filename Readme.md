@@ -33,9 +33,55 @@ draw()
 
 
 
+## Lesson 2
+
+**Goal: to get to know how to animate multiple things at once
 
 
+--- In order to do more complex animations you will need to [save](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/save)/[restore](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/restore) your current drawing state.
+
+let's see a basic example with [rotate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate) function:
+
+````
+function draw(i = 0) {
+    ...
+    
+    // remember context state
+    ctx.save()
+
+    // define a new center
+    ctx.translate(50, 50)
+
+    // rotate context and draw a circle
+    ctx.rotate(Math.PI/50 * i)        
+    ctx.beginPath()
+    ctx.arc(10, 10, 5, 0, Math.PI * 2)
+    ctx.fill()
+
+    //restore context state
+    ctx.restore()
+
+    // call next draw 
+    requestAnimationFrame(() => draw(i+1))
+
+}
+`````
 
 
+--- since we provide a `draw` function each time a new value of `i` argument, we can also use it to animate another things like color for example.
+
+we will use [Modulo(Reminder) Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder)
+
+````
+...
+ ctx.beginPath()
+ ctx.arc(10, 10, 5, 0, Math.PI * 2)
+ cty.fillStyle = `rgb(255, ${i%255}, ${1 - i%255})`
+ ctx.fill()
+
+````
 
 
+### Tasks
+- draw a circle stoke, so that rotating circle runs exactly around it
+- try `Math.sin` and `Math.cos` for color manipulation

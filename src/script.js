@@ -1,106 +1,121 @@
 const canvas = document.getElementById('exercise_2')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
-
 const ctx = canvas.getContext('2d')
 
 
-const MouseCoord = {
-    offsetX: null, 
-    offsetY: null,
-    set: function({offsetX, offsetY}){
-        this.offsetX = offsetX
-        this.offsetY = offsetY
-    }
+/*****   lesson 1   ******/
+
+function line(x = 0, y = 0) {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    x += 0.1
+    y += 0.1
+    ctx.fillStyle = "red";
+    ctx.beginPath()
+    ctx.arc(x, y, 5, 0, Math.PI * 2)
+    ctx.fill()
+
+
+
+    //setTimeout(draw, 100)
+    requestAnimationFrame(() => line(x + 10, y + 10))
 }
-canvas.addEventListener('mousemove', event => {
-    MouseCoord.set(event)
-})
+//line();
 
 
-function drawEyesAndSmiles () {
+/*****   lesson 2   ******/
 
-    const centers = [...Array(6).keys()].map(key => [50 * (2*key + 1), 50])
-    
-    draw(0, [
-        ...centers,
-        ...centers.map(([x, y]) => [x, y + 100]),
-        ...centers.map(([x, y]) => [x, y + 200]),
-        ...centers.map(([x, y]) => [x, y + 300]),
-        ...centers.map(([x, y]) => [x, y + 400]),
-    ])
+function draw(i = 0) {
 
-}
-
-function draw(i, centers) {
-
-    // schedule next draw call
-    window.requestAnimationFrame(() => draw(i+1, centers))
-    // cleanup 
+    // clear
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    for(j in centers) {
-        const center = centers[j]
+    // remember context state
+    ctx.save()
 
-         // define light power
-         const lightPower1 = 255 * Math.abs(Math.sin(( (1 - j/centers.length) * i)/100))
-         const lightPower2 = 255 * Math.abs(Math.cos(( j/centers.length * i)/100))
-        // remember context 
-        ctx.save()
+    // define a new center
+    ctx.translate(50, 50)
 
-        // define a new center
-        ctx.translate(...center)
-
-        // draw a circle
-        ctx.beginPath()
-        ctx.arc(0, 0, 25, 0, Math.PI * 2)
-        ctx.fillStyle = `rgb(${255 - lightPower2},  ${lightPower2}, ${lightPower1})`
-        ctx.fill()
-
-        // rotate context and draw a circle
-        ctx.rotate(Math.PI/50 * i)    
-        ctx.translate(10, 10)
-
-        ctx.beginPath()
-        ctx.arc(0, 0, 5, 0, Math.PI * 2)
-
-       
-        ctx.fillStyle = `rgb(${255}, ${lightPower1}, ${lightPower2})`
+    //circle stroke
+    ctx.beginPath()
+    ctx.arc(0, 0, 25, 0, Math.PI * 2)
 
 
-        ctx.fill()
+    ctx.stroke()
 
-        // restore context
-        ctx.restore()
+    // rotate context and draw a circle
+    ctx.rotate(Math.PI / 50 * i)
+    ctx.beginPath()
+    ctx.arc(10, 10, 5, 0, Math.PI * 2)
+    ctx.fillStyle = `rgb(${100},${Math.abs(Math.sin(i/100)*255)},${Math.abs(Math.cos(i/100)*255)})`
+    ctx.fill()
 
-        if(j%2 == 0) {
+    //restore context state
+    ctx.restore()
 
-            const [fromX, fromY] = [center[0], center[1] + 50]
-            const [toX, toY] = [center[0]+100, center[1] + 50]
-            const [cpX, cpY] = [center[0] + 50, center[1] + 100]
+    // call next draw 
+    requestAnimationFrame(() => draw(i + 1))
 
-            const {offsetY} = MouseCoord
-            const cpYmax = cpY
-            const cpYmin = cpY - 100
-            const _cpY = offsetY > cpYmax 
-            ? cpYmax
-            : offsetY < cpYmin 
-                ? cpYmin
-                : offsetY
+}
+//draw()
 
-            ctx.beginPath()
-            ctx.moveTo(fromX, fromY)
-            ctx.quadraticCurveTo(cpX, _cpY, toX, toY)
-            ctx.lineWidth = 10
-            ctx.strokeStyle = `rgb(${255 - lightPower2}, ${lightPower1}, ${lightPower2})`
 
-            ctx.stroke()
+/*****   moving block   ******/
+class Block {
 
-        }   
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+
+        this.start();
+
+        // Add event listener on keypress
+        document.addEventListener('keypress', (event) => {
+            var name = event.key;
+            //console.log('key pressed', name)
+
+            switch (name) {
+                case "w":
+                    this.y -= 10
+                    if (this.y <= 0) this.y = 0
+                    break;
+
+                case "a":
+                    this.x -= 10
+                    if (this.x <= 0) this.x = 0
+                    break;
+
+                case "s":
+                    this.y += 10
+                    if (this.y + 50 >= canvas.height) this.y = canvas.height - 50
+                    break;
+
+                case "d":
+                    this.x += 10
+                    if (this.x + 50 >= canvas.width) this.x = canvas.width - 50
+                    break
+            }
+
+
+        }, false);
+
     }
 
-    
-    
+
+    start() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        ctx.beginPath()
+        var w = (canvas.width - 50) / 255;
+        var h = (canvas.height - 50) / 255;
+        ctx.fillStyle = `rgb(0,${this.y/h},${this.x/w})`
+        ctx.rect(this.x, this.y, 50, 50)
+        ctx.fill()
+
+        window.requestAnimationFrame(() => this.start())
+    }
+
 }
 
-drawEyesAndSmiles(0)
+let player = new Block(100, 100);
